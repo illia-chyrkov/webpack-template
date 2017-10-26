@@ -4,7 +4,7 @@
   "description": "Start Webpack Template",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --open --cache",
     "build": "cross-env NODE_ENV=production webpack -p",
     "test": "mocha --compilers js:babel-core/register --reporter nyan"
   },

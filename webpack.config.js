@@ -21,7 +21,8 @@ module.exports = {
 					{
 						loader: 'css-loader',
 		              	options: {
-		                  	minimize: process.env.NODE_ENV !== 'development'
+		                  	minimize: process.env.NODE_ENV !== 'development',
+		                  	url: false
 		              	}
 					},
 					{
