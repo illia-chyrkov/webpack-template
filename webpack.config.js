@@ -26,6 +26,12 @@ module.exports = {
 		              	}
 					},
 					{
+						loader: 'autoprefixer-loader',
+						options: {
+							browsers: ["last 2 version", "> 1%"]
+						}
+					},
+					{
 						loader: 'sass-loader'
 					},
 				] })
