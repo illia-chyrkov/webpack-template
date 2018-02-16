@@ -1,0 +1,95 @@
+@import theme
+
+// width
+=r($width)
+	@media only screen and (max-width: $width+ "px")
+		@content
+
+=rmin($width)
+	@media only screen and (min-width: $width+ "px")
+		@content
+
+// height
+=rh($height)
+	@media only screen and (max-height: $height + "px")
+		@content
+
+=rhmin($height)
+	@media only screen and (min-height: $height + "px")
+		@content
+
+=cover
+	background-repeat: no-repeat
+	background-size: cover
+	background-position: 50% 50%
+
+=retina
+	@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)
+		@content
+
+// vertical-align at center
+=vcenter
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%,-50%)
+	
+//simple gradient
+=g($color1, $color2)
+	background-image: linear-gradient($color1, $color2)
+
+=gh($color1, $color2)
+	background-image: linear-gradient(left, $color1, $color2)
+	
+=placeholder-color($color)
+	&::-webkit-input-placeholder
+		color: $color
+	&:-moz-placeholder
+		color: $color
+	&::-moz-placeholder
+		color: $color
+	&:-ms-input-placeholder
+		color: $color 
+	&::placeholder
+		color: $color
+
+=placeholder
+	&::-webkit-input-placeholder
+		@content
+	&:-moz-placeholder
+		@content
+	&::-moz-placeholder
+		@content
+	&:-ms-input-placeholder
+		@content
+	&::placeholder
+		@content
+
+=unselectable
+	user-select: none
+	
+=hide-scroll($direction: "overflow-y")
+	overflow: scroll
+	overflow-y: hidden
+	overflow-x: hidden
+	#{$direction}: auto
+	-ms-overflow-style: none
+	overflow: -moz-scrollbars-none
+	    
+	&::-webkit-scrollbar
+		display: none
+		
+=scrollbar($size, $foreground-color, $background-color: mix($foreground-color, white, 50%))
+	&::-webkit-scrollbar
+		width: $size
+		height: $size
+		
+	&::-webkit-scrollbar-thumb
+		background: $foreground-color
+		
+	&::-webkit-scrollbar-track
+		background: $background-color
+		
+	body
+		scrollbar-face-color: $foreground-color
+		scrollbar-track-color: $background-color

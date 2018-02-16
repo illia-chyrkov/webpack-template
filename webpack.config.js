@@ -1,8 +1,41 @@
+const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
+let plugins = [
+	new webpack.DefinePlugin({
+		'process.env.NODE_ENV': JSON.stringify(
+			process.env.NODE_ENV || 'development'
+		)
+	}),
+	new ExtractTextPlugin({
+		filename: 'css/style.css',
+		disable: false,
+		allChunks: true
+	}),
+	new CopyWebpackPlugin([
+		{
+			from: {
+				glob: 'img/**/*',
+				dot: true
+			}
+		},
+		{
+			from: {
+				glob: 'fonts/**/*',
+				dot: true
+			}
+		}
+	]),
+	new NunjucksWebpackPlugin({
+		template: [{
+            from: './app/index.html',
+            to: 'index.html'
+        }]
+	})
+]
 
 module.exports = {
 	context: __dirname + '/app',
@@ -12,7 +45,6 @@ module.exports = {
 		filename: 'js/bundle.js',
 		library: '[name]'
 	},
-	devtool: process.env.NODE_ENV === 'development' ? '#cheap-module-source-map' : '(none)',
 	module: {
 		rules: [
 			{
@@ -49,28 +81,14 @@ module.exports = {
             }
 		]
 	},
-	plugins: [
-		new UglifyJSPlugin({ sourceMap: process.env.NODE_ENV === 'development' }),
-		new ExtractTextPlugin('css/style.css'),
-		new CopyWebpackPlugin([
-			{
-				from: {
-					glob: 'img/**/*',
-					dot: true
-				}
-			},
-			{
-				from: {
-					glob: 'fonts/**/*',
-					dot: true
-				}
-			}
-		]),
-		new NunjucksWebpackPlugin({
-			template: [{
-	            from: './app/index.html',
-	            to: 'index.html'
-	        }]
-		})
-	]
+	plugins:
+		process.env.NODE_ENV === 'production'
+			? [
+				...plugins,
+				new UglifyJSPlugin({
+					cache: true,
+					parallel: true
+				})
+			]
+			: [...plugins]
 }
