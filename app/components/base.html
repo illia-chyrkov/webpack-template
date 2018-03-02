@@ -9,12 +9,11 @@
     <!-- <meta property="og:image" content="path/to/image.jpg"> -->
     <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="css/style.css" lazyload>
-
     <meta name="theme-color" content="#FFF">
 </head>
 <body>
+	<link rel="stylesheet" href="css/style.css" lazyload>
+	<script src="js/bundle.js" defer></script>
 	{% block content %}{% endblock %}
-	<script src="js/bundle.js"></script>
 </body>
 </html>
