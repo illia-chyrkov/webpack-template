@@ -2,40 +2,19 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const fs = require('fs')
 
-let plugins = [
-	new webpack.DefinePlugin({
-		'process.env.NODE_ENV': JSON.stringify(
-			process.env.NODE_ENV || 'development'
-		)
-	}),
-	new ExtractTextPlugin({
-		filename: 'css/style.css',
-		disable: false,
-		allChunks: true
-	}),
-	new CopyWebpackPlugin([
-		{
-			from: {
-				glob: 'img/**/*',
-				dot: true
-			}
-		},
-		{
-			from: {
-				glob: 'fonts/**/*',
-				dot: true
-			}
-		}
-	]),
-	new NunjucksWebpackPlugin({
-		template: [{
-            from: './app/index.html',
-            to: 'index.html'
-        }]
+const htmlFiles = fs
+	.readdirSync('./app/')
+	.filter(function(file) {
+		return file.search(/\.html$/gi) >= 0
 	})
-]
+	.map(file => {
+		return {
+			from: './app/' + file,
+			to: file
+		}
+	})
 
 module.exports = {
 	context: __dirname + '/app',
@@ -48,47 +27,55 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.sass$/,
-				loader: ExtractTextPlugin.extract({ use: [
-					{
-						loader: 'css-loader',
-		              	options: {
-		                  	minimize: process.env.NODE_ENV !== 'development',
-		                  	url: false
-		              	}
-					},
-					{
-						loader: 'autoprefixer-loader',
-						options: {
-							browsers: ["last 2 version", "> 1%"]
-						}
-					},
-					{
-						loader: 'sass-loader'
-					},
-				] })
-			},
-			{
 				test: /\.js$/,
-				exclude: /(node_modules)/,
+				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader'
 				}
 			},
 			{
-                test: /\.html$/,
-                loader: 'nunjucks-loader'
-            }
+				test: /\.sass$/,
+
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: [
+						{
+							loader: 'css-loader',
+							options: {
+								minimize:
+									process.env.NODE_ENV !== 'development',
+								url: false
+							}
+						},
+						{
+							loader: 'postcss-loader'
+						},
+						{
+							loader: 'sass-loader'
+						}
+					]
+				})
+			}
 		]
 	},
-	plugins:
-		process.env.NODE_ENV === 'production'
-			? [
-				...plugins,
-				new UglifyJSPlugin({
-					cache: true,
-					parallel: true
-				})
-			]
-			: [...plugins]
+	plugins: [
+		new ExtractTextPlugin('css/style.css'),
+		new CopyWebpackPlugin([
+			{
+				from: {
+					glob: 'img/**/*',
+					dot: true
+				}
+			},
+			{
+				from: {
+					glob: 'fonts/**/*',
+					dot: true
+				}
+			}
+		]),
+		new NunjucksWebpackPlugin({
+			templates: htmlFiles
+		})
+	]
 }
