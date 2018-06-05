@@ -1,0 +1,95 @@
+.container
+	max-width: 1200px
+	box-sizing: border-box
+	padding: 0 15px
+	margin: 0 auto
+	position: relative
+	
+	+r(1200)
+		max-width: 990px
+	
+	+r(992)
+		max-width: 750px
+
+	+r(768)
+		max-width: 570px
+
+	+r(576)
+		max-width: 100%
+	
+.row
+	display: flex
+	margin: 0 -15px
+	
+	&.row--vc
+		-webkit-align-items: center
+		align-items: center
+	
+.col
+	flex-basis: 100%
+	padding: 0 15px
+	box-sizing: border-box
+	
+.hide-1200
+	+r(1200)
+		display: none !important
+
+.hide-992
+	+r(992)
+		display: none !important
+
+.hide-768
+	+r(768)
+		display: none !important
+
+.hide-576
+	+r(576)
+		display: none !important
+		
+.show-1200
+	display: none
+	
+	+r(1200)
+		display: block
+
+.show-992
+	display: none
+	
+	+r(992)
+		display: block
+
+.show-768
+	display: none
+	
+	+r(768)
+		display: block
+
+.show-576
+	display: none
+	
+	+r(576)
+		display: block
+		
+=container-no-borders
+	display: grid
+	grid-template-columns: 1fr repeat(12, 97.5px) 1fr
+	
+	+r(1200)
+		grid-template-columns: 1fr repeat(12, 82.5px) 1fr
+	
+	+r(992)
+		grid-template-columns: 1fr repeat(12, 62.5px) 1fr
+
+	+r(768)
+		grid-template-columns: 1fr repeat(12, 47.5px) 1fr
+
+	+r(576)
+		grid-template-columns: 0px repeat(12, 1fr) 0px
+	
+	&:before,
+	&:after
+		content: ''
+		
+	> *
+		padding: 0 15px
+		box-sizing: border-box
