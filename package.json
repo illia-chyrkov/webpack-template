@@ -20,7 +20,7 @@
     "babel-loader": "7.x",
     "babel-preset-env": "latest",
     "chai": "4.x",
-    "copy-webpack-plugin": "4.x",
+    "copy-webpack-plugin": "latest",
     "cross-env": "5.x",
     "css-loader": "0.x",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
