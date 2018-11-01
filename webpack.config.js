@@ -1,8 +1,10 @@
-const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin')
 const fs = require('fs')
+
+const devMode = process.env.NODE_ENV !== 'production'
 
 const htmlFiles = fs
 	.readdirSync('./app/')
@@ -21,8 +23,10 @@ module.exports = {
 	entry: './js/app.js',
 	output: {
 		path: __dirname + '/dist',
-		filename: 'js/bundle.js',
-		library: '[name]'
+		filename: 'js/bundle.js'
+	},
+	optimization: {
+		minimizer: [new OptimizeCSSAssetsPlugin({})]
 	},
 	module: {
 		rules: [
@@ -35,31 +39,25 @@ module.exports = {
 			},
 			{
 				test: /\.sass$/,
-
-				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: [
-						{
-							loader: 'css-loader',
-							options: {
-								minimize:
-									process.env.NODE_ENV !== 'development',
-								url: false
-							}
-						},
-						{
-							loader: 'postcss-loader'
-						},
-						{
-							loader: 'sass-loader'
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							minimize: devMode,
+							url: false
 						}
-					]
-				})
+					},
+					'postcss-loader',
+					'sass-loader'
+				]
 			}
 		]
 	},
 	plugins: [
-		new ExtractTextPlugin('css/style.css'),
+		new MiniCssExtractPlugin({
+			filename: 'css/style.css'
+		}),
 		new CopyWebpackPlugin([
 			{
 				from: {

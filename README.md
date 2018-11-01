@@ -20,9 +20,3 @@ For Production:
 ```bash
 $ yarn build
 ```
-
-Run tests:
-
-```bash
-$ yarn test
-```
