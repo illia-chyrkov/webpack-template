@@ -2,7 +2,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin')
+
 const fs = require('fs')
+const path = require('path')
 
 const devMode = process.env.NODE_ENV !== 'production'
 
@@ -24,6 +26,11 @@ module.exports = {
 	output: {
 		path: __dirname + '/dist',
 		filename: 'js/bundle.js'
+	},
+	resolve: {
+		alias: {
+			'~': path.resolve(__dirname, 'app/js/')
+		}
 	},
 	optimization: {
 		minimizer: [new OptimizeCSSAssetsPlugin({})]
