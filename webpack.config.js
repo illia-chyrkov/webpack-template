@@ -1,12 +1,11 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const fs = require('fs')
 const path = require('path')
-
-const devMode = process.env.NODE_ENV !== 'production'
 
 const htmlFiles = fs
 	.readdirSync('./app/')
@@ -33,7 +32,16 @@ module.exports = {
 		}
 	},
 	optimization: {
-		minimizer: [new OptimizeCSSAssetsPlugin({})]
+		minimizer: [
+			new OptimizeCSSAssetsPlugin({}),
+			new UglifyJsPlugin({
+				test: /\.js$/,
+				exclude: /node_modules/,
+				uglifyOptions: {
+					output: { comments: false }
+				}
+			})
+		]
 	},
 	module: {
 		rules: [
@@ -51,7 +59,6 @@ module.exports = {
 					{
 						loader: 'css-loader',
 						options: {
-							minimize: devMode,
 							url: false
 						}
 					},
