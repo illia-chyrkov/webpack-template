@@ -83,7 +83,10 @@ module.exports = {
 				from: {
 					glob: 'fonts/**/*',
 					dot: true
-				}
+				},
+				transformPath (targePath) {
+					return targePath.replace('fonts/','css/')
+				}		 
 			}
 		]),
 		new NunjucksWebpackPlugin({
