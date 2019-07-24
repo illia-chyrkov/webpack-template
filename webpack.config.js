@@ -20,17 +20,6 @@ fs.readdirSync('./app/')
 		})
 	})
 
-fs.readdirSync('./app/achievements/')
-	.filter(file => {
-		return file.search(/\.html$/gi) >= 0
-	})
-	.forEach(file => {
-		htmlFiles.push({
-			from: './app/achievements/' + file,
-			to: './achievements/' + file
-		})
-	})
-
 module.exports = {
 	context: __dirname + '/app',
 	entry: './js/app.js',
