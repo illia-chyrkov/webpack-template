@@ -3,7 +3,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const WrapperPlugin = require('wrapper-webpack-plugin');
+const WrapperPlugin = require('wrapper-webpack-plugin')
 
 const fs = require('fs')
 const path = require('path')
