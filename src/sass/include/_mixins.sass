@@ -19,22 +19,20 @@
 		@content
 
 =cover
-	background-repeat: no-repeat
-	background-size: cover
 	background-position: 50% 50%
+	background-size: cover
 
-=retina
-	@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)
-		@content
+=contain
+	background-repeat: no-repeat
+	background-position: 50% 50%
+	background-size: contain
 
-// vertical-align at center
 =vcenter
 	position: absolute
 	top: 50%
-	left: 50%
-	transform: translate(-50%,-50%)
-	
-//simple gradient
+
+	transform: translateY(-50%)
+
 =g($color1, $color2)
 	background-image: linear-gradient($color1, $color2)
 
@@ -64,17 +62,15 @@
 		@content
 	&::placeholder
 		@content
-
-=unselectable
-	user-select: none
 	
 =hide-scroll($direction: "overflow-y")
 	overflow: scroll
-	overflow-y: hidden
+	overflow: -moz-scrollbars-none
 	overflow-x: hidden
+	overflow-y: hidden
+
 	#{$direction}: auto
 	-ms-overflow-style: none
-	overflow: -moz-scrollbars-none
 	    
 	&::-webkit-scrollbar
 		display: none

@@ -1,22 +1,21 @@
 # Webpack Starter Template
 
-Usage
------
+## Usage
 
 Install:
 
 ```bash
-$ yarn
+$ npm i
 ```
 
 Run:
 
 ```bash
-$ yarn start
+$ npm start
 ```
 
 For Production:
 
 ```bash
-$ yarn build
+$ npm run build
 ```
