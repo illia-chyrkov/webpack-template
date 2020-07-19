@@ -1,6 +1,3 @@
-@import theme
-
-// width
 =r($width)
 	@media only screen and (max-width: $width+ "px")
 		@content
@@ -9,7 +6,6 @@
 	@media only screen and (min-width: $width+ "px")
 		@content
 
-// height
 =rh($height)
 	@media only screen and (max-height: $height + "px")
 		@content
@@ -26,30 +22,6 @@
 	background-repeat: no-repeat
 	background-position: 50% 50%
 	background-size: contain
-
-=vcenter
-	position: absolute
-	top: 50%
-
-	transform: translateY(-50%)
-
-=g($color1, $color2)
-	background-image: linear-gradient($color1, $color2)
-
-=gh($color1, $color2)
-	background-image: linear-gradient(to left, $color1, $color2)
-	
-=placeholder-color($color)
-	&::-webkit-input-placeholder
-		color: $color
-	&:-moz-placeholder
-		color: $color
-	&::-moz-placeholder
-		color: $color
-	&:-ms-input-placeholder
-		color: $color 
-	&::placeholder
-		color: $color
 
 =placeholder
 	&::-webkit-input-placeholder
