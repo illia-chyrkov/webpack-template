@@ -31,6 +31,10 @@ module.exports = {
 			new OptimizeCSSAssetsPlugin({}),
 		],
 	},
+	devServer: {
+		compress: true,
+		disableHostCheck: true,
+	},
 	module: {
 		rules: [
 			{
@@ -94,23 +98,6 @@ module.exports = {
 			test: /\.js$/,
 			footer: `window.author="${author}";`,
 		}),
-		// new CopyWebpackPlugin([
-		// 	{
-		// 		from: {
-		// 			glob: 'img/**/*',
-		// 			dot: true,
-		// 		},
-		// 	},
-		// 	{
-		// 		from: {
-		// 			glob: 'fonts/**/*',
-		// 			dot: true,
-		// 		},
-		// 		transformPath(targePath) {
-		// 			return targePath.replace('fonts/', 'css/')
-		// 		},
-		// 	},
-		// ]),
 		new CopyPlugin({
 			patterns: [
 				{ from: 'img/**/*' },
