@@ -5,14 +5,20 @@
 		<title>Index</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<!-- <meta property="og:image" content="path/to/image.jpg"> -->
 		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
-
 		<meta name="theme-color" content="#FFF">
 	</head>
-	<body>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+	<body class="js-loading">
+		<style>
+			body {
+				transition: opacity 0.4s ease-in-out;
+			}
+			.js-loading {
+				opacity: 0;
+				transition: none;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="css/bundle.css">
 		
 
 	<p>Test!</p>

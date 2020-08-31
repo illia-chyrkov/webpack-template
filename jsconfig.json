@@ -1,12 +1,13 @@
 {
-	"compilerOptions": {
-		"resolveJsonModule": true,
-		"checkJs": true,
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["src/js/*"],
-			"~/*": ["src/*"]
-		}
-	},
-	"exclude": ["node_modules"]
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "checkJs": true,
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "paths": {
+      "@/*": ["src/js/*"],
+      "~/*": ["src/*"]
+    }
+  },
+  "exclude": ["node_modules"]
 }

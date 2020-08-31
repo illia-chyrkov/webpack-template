@@ -1,5 +1,3 @@
-# Webpack Starter Template
-
 ## Usage
 
 Install:

@@ -1,0 +1,7 @@
+{
+  "extends": ["stylelint-prettier/recommended", "stylelint-order-config-csscomb"],
+  "plugins": ["stylelint-prettier", "stylelint-order"],
+  "rules": {
+    "prettier/prettier": true
+  }
+}
