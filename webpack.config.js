@@ -1,11 +1,7 @@
 const CopyPlugin = require('copy-webpack-plugin')
-const WrapperPlugin = require('wrapper-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const TerserJSPlugin = require('terser-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const path = require('path')
-
-const { author } = require('./package.json')
 
 module.exports = {
   context: path.join(__dirname, 'src'),
@@ -13,7 +9,7 @@ module.exports = {
     bundle: './js/main.js',
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'docs'),
     filename: 'js/[name].js',
     chunkFilename: 'js/[name].bundle.js',
   },
@@ -24,15 +20,18 @@ module.exports = {
     },
   },
   optimization: {
-    minimizer: [
-      new TerserJSPlugin({
-        extractComments: false,
-      }),
-      new OptimizeCSSAssetsPlugin({}),
-    ],
+    minimizer: ['...', new CssMinimizerPlugin()],
   },
+  devtool:
+    process.env.NODE_ENV === 'development'
+      ? 'eval-cheap-module-source-map'
+      : false,
   devServer: {
+    contentBase: path.resolve(__dirname, './docs'),
+    open: true,
     compress: true,
+    host: '0.0.0.0',
+    port: 8080,
     disableHostCheck: true,
   },
   module: {
@@ -78,10 +77,6 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'css/bundle.css',
-    }),
-    new WrapperPlugin({
-      test: /\.js$/,
-      footer: `window.author="${author}";`,
     }),
     new CopyPlugin({
       patterns: [
