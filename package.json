@@ -17,7 +17,6 @@
   "author": "Illia Chyrkov",
   "license": "ISC",
   "dependencies": {
-    "css-minimizer-webpack-plugin": "^3.0.2",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
@@ -30,6 +29,7 @@
     "copy-webpack-plugin": "^9.0.1",
     "cross-env": "^7.0.3",
     "css-loader": "^6.0.0",
+    "css-minimizer-webpack-plugin": "^3.0.2",
     "csscomb": "^4.3.0",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
