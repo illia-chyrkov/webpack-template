@@ -11,12 +11,13 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "requireConfigFile": false
   },
   "rules": {
     "prettier/prettier": 2,
